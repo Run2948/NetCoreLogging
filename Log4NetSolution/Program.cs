@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -7,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace SerilogSolution
+namespace Log4NetSolution
 {
     public class Program
     {
@@ -25,8 +26,12 @@ namespace SerilogSolution
                     // loggingBuilder.AddFilter("System", LogLevel.Error);
                     // loggingBuilder.AddFilter("Microsoft", LogLevel.Error);
 
-                    // loggingBuilder.AddFile("Logs/Logs_{Date}.txt");
-                    loggingBuilder.AddFile(hostingContext.Configuration.GetSection("Logging"));
+                    // optional config file,default name is log4net.config
+
+                    // var path = Path.Combine(Directory.GetCurrentDirectory(), "Log4Net.config");
+                    // loggingBuilder.AddLog4Net(path);
+
+                    loggingBuilder.AddLog4Net();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
